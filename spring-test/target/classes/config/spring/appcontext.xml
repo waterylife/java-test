@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+>
+    <bean id = "demo1"
+          class = "com.shawn.test.spring.BeanDemo"
+          factory-method="getInstance"
+          init-method="init"
+          destroy-method="destroy"
+    >
+        <constructor-arg value = "1"/>
+        <property name = "var2" value = "hello"/>
+        <property name="var3">
+            <list>
+                <value>ll1</value>
+                <value>ll2</value>
+                <value>ll3</value>
+            </list>
+        </property>
+        <property name="var4">
+            <map>
+                <entry key = 'k1' value="vv1"/>
+                <entry key = 'k2' value="vv2"/>
+                <entry key = 'k3' value="vv3"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id = "watcher" class = "com.shawn.test.spring.aop.AspectWatcher">
+    </bean>
+
+    <!--<aop:config>
+        <aop:aspect ref = "watcher">
+            <aop:pointcut id="nothing" expression="execution(* com.shawn.test.spring.BeanDemo.doNoting(..)) and args(strVal)"/>
+            &lt;!&ndash;<aop:after method="after" pointcut-ref="nothing"/>&ndash;&gt;
+            <aop:before method="before" pointcut-ref="nothing" arg-names="strVal"/>
+        </aop:aspect>
+
+    </aop:config>-->
+
+    <aop:aspectj-autoproxy/>
+
+</beans>
